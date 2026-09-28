@@ -1,0 +1,42 @@
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    restart: unless-stopped
+    depends_on:
+      - database
+    networks:
+      - geodesic-network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: unless-stopped
+    ports:
+      - "8050:8050"
+    depends_on:
+      - backend
+    networks:
+      - geodesic-network
+
+  database:
+    build: ./database
+    container_name: database
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    networks:
+      - geodesic-network
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: benchmark_db
+      POSTGRES_USER: benchmark_user
+      POSTGRES_PASSWORD: secret
+    networks:
+      - geodesic-network
+
+networks:
+  geodesic-network:
+    driver: bridge

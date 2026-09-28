@@ -1,0 +1,16 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Shameless Bel'Veth Abusers"
+authors = [
+  { name = "Martin Boulanger", email = "martin.boulanger@epita.fr" },
+  { name = "Roman Miralves", email = "roman.miralves@epita.fr" }
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg2-binary",
+	"fastapi",
+	"python-multipart",
+    "uvicorn[standard]"
+]
